@@ -97,20 +97,37 @@ public class ProblemSolutions {
      * The merging portion of the merge sort, divisible by k first
      */
 
-    private void mergeDivisbleByKFirst(int arr[], int k, int left, int mid, int right)
-    {
-        // YOUR CODE GOES HERE, THIS METHOD IS NO MORE THAN THE STANDARD MERGE PORTION
-        // OF A MERGESORT, EXCEPT THE NUMBERS DIVISIBLE BY K MUST GO FIRST WITHIN THE
-        // SEQUENCE PER THE DISCUSSION IN THE PROLOGUE ABOVE.
-        //
-        // NOTE: YOU CAN PROGRAM THIS WITH A SPACE COMPLEXITY OF O(1) OR O(N LOG N).
-        // AGAIN, THIS IS REFERRING TO SPACE COMPLEXITY. O(1) IS IN-PLACE, O(N LOG N)
-        // ALLOCATES AUXILIARY DATA STRUCTURES (TEMPORARY ARRAYS). IT WILL BE EASIER
-        // TO CODE WITH A SPACE COMPLEXITY OF O(N LOG N), WHICH IS FINE FOR PURPOSES
-        // OF THIS PROGRAMMING EXERCISES.
+    private void mergeDivisbleByKFirst(int arr[], int k, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
 
-        return;
+        int[] leftArr = new int[n1];
+        int[] rightArr = new int[n2];
 
+        System.arraycopy(arr, left, leftArr, 0, n1);
+        System.arraycopy(arr, mid + 1, rightArr, 0, n2);
+
+        int i = 0, j = 0, kIndex = left;
+
+        while (i < n1 && j < n2) {
+            if (leftArr[i] % k == 0 && rightArr[j] % k == 0) {
+                arr[kIndex++] = (leftArr[i] >= rightArr[j]) ? leftArr[i++] : rightArr[j++];
+            } else if (leftArr[i] % k == 0) {
+                arr[kIndex++] = leftArr[i++];
+            } else if (rightArr[j] % k == 0) {
+                arr[kIndex++] = rightArr[j++];
+            } else {
+                arr[kIndex++] = (leftArr[i] <= rightArr[j]) ? leftArr[i++] : rightArr[j++];
+            }
+        }
+
+        while (i < n1) {
+            arr[kIndex++] = leftArr[i++];
+        }
+
+        while (j < n2) {
+            arr[kIndex++] = rightArr[j++];
+        }
     }
 
 
