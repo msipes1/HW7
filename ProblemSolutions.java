@@ -37,13 +37,20 @@ public class ProblemSolutions {
         int n = values.length;
 
         for (int i = 0; i < n - 1; i++) {
+            int indexToSwap = i;
 
-            // YOU CODE GOES HERE -- COMPLETE THE INNER LOOP OF THIS
-            // "SELECTION SORT" ALGORITHM.
-            // DO NOT FORGET TO ADD YOUR NAME / SECTION ABOVE
+            for (int j = i + 1; j < n; j++) {
+                if ((ascending && values[j] < values[indexToSwap]) || (!ascending && values[j] > values[indexToSwap])) {
+                    indexToSwap = j;
+                }
+            }
 
+            if (indexToSwap != i) {
+                int temp = values[i];
+                values[i] = values[indexToSwap];
+                values[indexToSwap] = temp;
+            }
         }
-
     } // End class selectionSort
 
 
