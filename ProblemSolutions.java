@@ -215,11 +215,22 @@ public class ProblemSolutions {
      */
 
     public static int numRescueSleds(int[] people, int limit) {
+        Arrays.sort(people);
 
-        // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT
+        int left = 0;             
+        int right = people.length - 1; 
+        int sledCount = 0;        
 
-        return -1;
+        while (left <= right) {
+            if (people[left] + people[right] <= limit) {
+                left++;
+            }
+            
+            right--;
+            sledCount++;
+        }
 
+        return sledCount;
     }
 
 } // End Class ProblemSolutions
